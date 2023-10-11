@@ -1,0 +1,9 @@
+[submodule "p9-patients-microservice"]
+	path = p9-patients-microservice
+	url = https://github.com/SimonWithoutGarfunkle/p9-patients-microservice.git
+[submodule "p9-doctors-microservice"]
+	path = p9-doctors-microservice
+	url = https://github.com/SimonWithoutGarfunkle/p9-doctors-microservice.git
+[submodule "p9-assessment-microservice"]
+	path = p9-assessment-microservice
+	url = https://github.com/SimonWithoutGarfunkle/p9-assessment-microservice.git
