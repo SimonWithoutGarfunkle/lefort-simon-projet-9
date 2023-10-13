@@ -10,3 +10,6 @@
 	path = p9-assessment-microservice
 	url = https://github.com/SimonWithoutGarfunkle/p9-assessment-microservice.git
 	name = s3
+[submodule "p9-front-microservice"]
+	path = p9-front-microservice
+	url = https://github.com/SimonWithoutGarfunkle/p9-front-microservice.git
