@@ -13,6 +13,3 @@
 [submodule "p9-front-microservice"]
 	path = p9-front-microservice
 	url = https://github.com/SimonWithoutGarfunkle/p9-front-microservice.git
-[submodule "p9-gateway-microservice"]
-	path = p9-gateway-microservice
-	url = https://github.com/SimonWithoutGarfunkle/p9-gateway-microservice.git
