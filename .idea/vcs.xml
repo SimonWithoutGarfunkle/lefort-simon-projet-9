@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p9-assessment-microservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p9-doctors-microservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p9-front-microservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p9-patients-microservice" vcs="Git" />
+  </component>
+</project>
