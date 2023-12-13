@@ -36,7 +36,7 @@ Telecharger et dézipper chacun des microservices dans le projet principal
 Depuis le dossier racine, utiliser la commande : "docker-compose build" 
 Selon la vitesse de la connexion internet, cette étape peut prendre plusieurs minutes.
 
-4.Ports
+3.Ports
 
 Par défaut, le programme utilise les ports suivants. Assurez vous qu'ils soient bien disponibles. Si besoin, vous pouvez modifier ces paramètres.
 - Microservice front : 8080
@@ -55,6 +55,7 @@ Les images sont désormais disponibles sur Docker. Vous pouvez démarrer le proj
 L'application est désormais accessible ! http://localhost:8080/login
 
 Pour simplifier la découverte du programme, l'écran de login est pré-rempli avec les identifiants d'un compte.
+
 
 ### Présentation des microservices
 
@@ -75,6 +76,7 @@ Le front envoie ses requetes à la Gateway.
 **Gateway :**
 Les 3 services Back (Patients, Doctor, Assessment) sont situées dernière la Gateway. Les requetes sont envoyées à la Gateway qui les redirigent vers les microservices adéquates.
 La Gateway front est entièrement sécurisé. Il faut etre identifié pour l'utiliser (memes identifiants que le front).
+
 
 
 ### Ressources
