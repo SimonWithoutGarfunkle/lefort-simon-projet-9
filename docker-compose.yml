@@ -1,0 +1,103 @@
+version: '3.8'
+services:
+  microservice-patient:
+    build:
+      context: ./p9-patients-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "9001:9001"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+  microservice-front:
+    build:
+      context: ./p9-front-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - microservice-patient
+
+  microservice-gateway:
+    build:
+      context: ./p9-gateway-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    env_file:
+      - .env
+
+  microservice-doctor:
+    build:
+      context: ./p9-doctors-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+
+  microservice-assessment:
+    build:
+      context: ./p9-assessment-microservice
+      dockerfile: Dockerfile
+    ports:
+      - "9003:9003"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: patientsdb
+    volumes:
+      - db_data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootroot
+      MONGO_INITDB_DATABASE: doctorsdb
+    volumes:
+      - mongodb_data:/data/db
+
+  mongodb-test:
+    image: mongo:latest
+    ports:
+      - "27019:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MONGO_INITDB_DATABASE: doctorstestdb
+    volumes:
+      - test_mongodb_data:/data/db
+
+
+  mysql-test:
+    image: mysql:8.0
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: patientstestdb
+    volumes:
+      - test_db_data:/var/lib/mysql
+
+volumes:
+  db_data:
+  test_db_data:
+  mongodb_data:
+  test_mongodb_data:

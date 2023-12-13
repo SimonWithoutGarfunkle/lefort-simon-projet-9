@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/p9-assessment-microservice" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p9-doctors-microservice" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p9-front-microservice" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/p9-gateway-microservice" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/p9-patients-microservice" vcs="Git" />
   </component>
 </project>
