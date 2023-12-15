@@ -85,3 +85,29 @@ Le dépot GitHub contient tous les éléments.
 **Bases de données :**
 Le microservice Patients utilise la base de données MySQL "patientsdb". Elle est pré remplie avec 4 patients pour la démo.
 Le microservice Doctor utilise la base de données MongoDB "doctorsdb". Elle est pré remplie avec les notes de médecin pour les 4 patients de la base patientsdb.
+
+# Green Code
+Le numérique est une source de pollution mondiale. Ce secteur représente 2,5% de l’empreinte carbone en France (rapport Arcep 2022).
+Les principales problématiques mises en avant sont :
+ - La consommation excessive de l’espace ou des ressources du disque dur par les logiciels.
+ - Les logiciels contiennent de nombreuses fonctionnalités inutiles et non essentielles.
+Il est donc essentiel d'avoir ces éléments en tete dans toutes les étapes de la création d'un projet.
+
+Le Front-End joue un role essentiel dans cette démarche. En tant qu'interface avec l'utilisateur, le Front permet de savoir précisement comment l'outil est utilisé et donc d'identifier les fonctionnalités clés et les fonctionnalités inutilisées qui pourront etre retirées.
+Concretement, un Front responsable, c'est un front léger (sans animations et images inutiles) et avec des requetes optimisées.
+
+Pour le Back-End, la consommation de ressources dépend de la [compléxité algorythmique](https://fr.wikipedia.org/wiki/Analyse_de_la_complexit%C3%A9_des_algorithmes#Complexit%C3%A9,_comparatif). Il est important de sensibiliser les développeurs à cette notion. Une compléxité algorythmique non maitrisée peut transformer un programme leger et rapide lors d'une démo en un gouffre à mémoire, extremement lent en production. La mauvaise pratique la plus courante est la compléxité O(n²) qui correspond au parcours d'un tableau a 2 dimensions (une imbrication de boucle "for" par exemple) :
+
+Enfin pour la base de données, la redondance des données est la principale cause de surconsommation (il s'agit ici de la redondance non maitrisée et non de la replication à des fins de sauvegarde ou de maintien d'up-time). Une bonne pratique pour éviter la redondance est de [normaliser la base de données](https://fr.wikipedia.org/wiki/Forme_normale_(bases_de_donn%C3%A9es_relationnelles)).
+En appliquant systématiquement au moins la 2e forme normale, on limite grandement le risque de doublons inutils, et donc de stockage inutile.
+
+## Application du Green Code à Médilabo
+Les bons points :
+ - Les bases de données sont normées, les données ne sont pas redondantes. Par exemple, la base MongoDB se limite à l'ID patient, elle ne contient pas son nom et son prénom.
+ - La compléxité algorithmique est faible . Il n'y a aucune imbrication de boucle.
+ - L'application est bien logé. Grâce a ces logs, il est facile d'identifier les fonctionnalités inutilisées pour alléger l'application.
+
+Les points d'amélioration :
+ - l'architecture en microservice présente de nombreux avantages pour une grosse application. Elle sera certainement justifiée quand ce programme atteindra une taille critique mais actuellement ceci semble être de l'[overengineering](https://en.wikipedia.org/wiki/Overengineering). Les notes des docteurs qui constituent l'historique des patients n'ont pas de raison d'exister en dehors du patient. Une unique base MongoDB pour le projet semble indiquée. De même, l'ensemble du projet pourrait etre regroupé en 1 service (voir 2 avec le service Front et le service Back si cela reflète mieux les équipes de travaille). Ainsi, au lieu de disposer de 5 containers (les 3 backs, le front et la gateway) avec Java et Spring Boot, le programme tournerai avec 1 ou 2 seulement. L'espace de stockage requis serait diviser par 3.
+ - Mise en place d'outils pour mesurer la consommation de ressources. On pourra ainsi identifier les composants les plus consommateurs pour les refactorer.
+ - La base de données patients contient des informations de contact qui ne sont jamais utilisées. Si elles ne sont pas necessaires, elles peuvent etre retirées.
